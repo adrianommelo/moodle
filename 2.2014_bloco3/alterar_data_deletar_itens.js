@@ -268,3 +268,25 @@ function acessaAVA($id_AVAS, $nomepropriedade)
 
   };
 }
+
+
+//-------------------------------------------------------TÓPICOS VAZIOS
+//Variação para usar essa função de forma individual
+function procuraTopicosVazios($avaList,$avaIdProperty)
+{
+  //looping que faz a remoção em mais de um ava
+    for ($i = 0; $i < $avaList.length; $i++) {
+      _navigateTo($str_url+'course/view.php?id='+$avaListIds[$i][$avaIdProperty]);
+    _wait(2000);
+      //traz qtde de tópicos q estão sobrando e retira da página(oculta, reduz a visão)
+    $collectTopic= _collect('_heading3', '/Tópico .*/', _in(_div('region-content')));
+    if($collectTopic.length > 0)
+    {
+        for($i=0; $i < $collectTopic.length; $i++)
+        {
+        _click(_link("reduce-sections"));
+        _wait(3000);
+        }
+    }
+  }
+}
